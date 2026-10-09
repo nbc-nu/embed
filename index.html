@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="margin:0;padding:0;overflow:hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregador de Iframe</title>
+</head>
+<body style="margin:0;padding:0;">
+
+    <iframe id="meuIframe" src="" style="width:100vw;height:100vh;border:none;display:block;"></iframe>
+
+    <script>
+
+
+        const urlCompleta = window.location.href;
+        const base = window.location.origin + window.location.pathname;
+        
+
+        let linkDestino = urlCompleta.replace(base, '');
+
+
+        if (linkDestino.startsWith('/')) {
+            linkDestino = linkDestino.substring(1);
+        }
+
+
+        if (linkDestino && !linkDestino.startsWith('http://') && !linkDestino.startsWith('https://')) {
+            linkDestino = 'https://' + linkDestino;
+        }
+
+
+        if (linkDestino) {
+            document.getElementById('meuIframe').src = linkDestino;
+        } else {
+
+            document.getElementById('meuIframe').src = 'data:text/html,<h1>Wellcome</h1><hr><p>It%20works!%20you%20are%20seeing%20an%20embed%20of%20a%20data:text/html';
+        }
+    </script>
+</body>
+</html>
