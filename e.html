@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="margin:0;padding:0;overflow:hidden;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0;padding:0;">
+
+    <iframe id="meuIframe" src="" style="width:100vw;height:100vh;border:none;display:block;"></iframe>
+
+    <script>
+        function carregarIframe() {
+            let hash = window.location.hash;
+
+            if (hash.startsWith('#')) {
+                hash = hash.substring(1);
+            }
+
+            let linkDestino = '';
+            
+            if (hash) {
+                try {
+                    linkDestino = atob(hash);
+                } catch (e) {
+                    linkDestino = '';
+                }
+            }
+
+            if (linkDestino && !linkDestino.startsWith('http://') && !linkDestino.startsWith('https://')) {
+                linkDestino = 'https://' + linkDestino;
+            }
+
+            const iframe = document.getElementById('meuIframe');
+            if (linkDestino) {
+                iframe.src = linkDestino;
+            } else {
+                iframe.src = 'https://exemplo.com';
+            }
+        }
+
+        carregarIframe();
+        window.addEventListener('hashchange', carregarIframe);
+    </script>
+</body>
+</html>
